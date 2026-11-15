@@ -1,0 +1,50 @@
+<!--
+必要な型だけを選び、Markdownの順に繰り返す。全型を出力しない。
+{{heading}} と {{section_symbol}} はエスケープしたテキスト。
+{{body_html}} と {{list_items_html}} は安全に変換した本文／li要素列。生HTMLを直接代入しない。
+見出しがない本文には見出し枠を付けない。ページ全体を左右16px paddingのdivで一度だけ囲む。
+-->
+
+<!-- 通常の見出し＋本文。ページ先頭では上marginを30pxから18pxへ変更する。 -->
+<div style="margin:30px 0 14px; padding:0 0 8px; border-bottom:2px solid #B8D6F0;">
+  <div style="font-size:22px; font-weight:bold; color:#28679B;">
+    <span style="color:#326CE5;">{{section_symbol}}</span> {{heading}}
+  </div>
+</div>
+<div style="font-size:16px; line-height:1.7; color:#293444;">
+  {{body_html}}
+</div>
+
+<!-- 下位見出し＋本文。見出し名ではなく入力内の階層から選ぶ。 -->
+<div style="margin:24px 0 12px; padding:0 0 7px; border-bottom:1px solid #B8D6F0;">
+  <div style="font-size:19px; font-weight:bold; color:#28679B;">
+    <span style="color:#326CE5;">{{section_symbol}}</span> {{heading}}
+  </div>
+</div>
+<div style="font-size:16px; line-height:1.7; color:#293444;">
+  {{body_html}}
+</div>
+
+<!--
+参加対象を示す枠付きリスト。見出し名ではなく本文の目的で選ぶ。
+通常の注意事項などは自動では囲まない。ユーザーが別の箇所の枠付き強調を明示した場合はこの枠を使う。
+番号付きリストならulをolへ変更し、入力の番号順を保持する。
+見出しがなければ見出しdivを省く。導入文やリスト後の文章は本文型で元の位置に残す。
+-->
+<div style="border:1px solid #95BDE2; padding:16px 20px; margin:20px 0 22px;">
+  <div style="font-size:17px; font-weight:bold; color:#28679B; margin-bottom:10px;">
+    {{heading}}
+  </div>
+  <ul style="font-size:16px; line-height:1.75; color:#293444; padding-left:22px; margin:0;">
+    {{list_items_html}}
+  </ul>
+</div>
+
+<!--
+body_htmlはp、strong/em、a、imgなどで入力の内容と順を保持する。
+通常の箇条書きは次の型を本文中の元の位置で使う。番号付きならulをolへ変更する。
+枠付きリスト内に導入文などがあれば、本文16px・行高1.7の型で元の位置に残す。
+-->
+<ul style="font-size:16px; line-height:1.7; color:#293444; padding-left:23px;">
+  {{list_items_html}}
+</ul>

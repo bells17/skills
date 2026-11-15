@@ -1,0 +1,43 @@
+<!--
+{{heading}}、{{section_symbol}}、{{session_symbol}}、{{number_time}}、{{title}}、{{affiliation}}はエスケープしたテキスト。
+{{number_time}}は入力にある番号と時刻だけで組む。例: 発表1 ／ 19:00 – 19:20。欠けた項目の区切りを残さない。
+{{image_url}}は検査・属性エスケープ済みURL、{{image_alt}}は入力にある代替テキストまたは氏名を属性エスケープしたもの。
+{{speaker_html}}と{{description_html}}は安全に変換した氏名・SNSリンク／概要。生HTMLを直接代入しない。
+親見出しは存在するときだけ一度出力。導入文はStandardの本文型で元の位置に残す。ページ先頭なら上marginを18pxにする。
+-->
+<div style="margin:34px 0 18px; padding:0 0 8px; border-bottom:2px solid #B8D6F0;">
+  <div style="font-size:22px; font-weight:bold; color:#28679B;">
+    <span style="color:#326CE5;">{{section_symbol}}</span> {{heading}}
+  </div>
+</div>
+
+<!-- 発表ごとに以下の外枠を繰り返す。最後も区切り線を残す。 -->
+<div style="margin:0 0 24px; padding:0 0 24px; border-bottom:1px solid #B8D6F0;">
+  <!-- 番号と時刻が両方なければ、この行ごと省く。 -->
+  <div style="font-size:15px; font-weight:bold; color:#326CE5; margin-bottom:8px;">
+    {{session_symbol}} {{number_time}}
+  </div>
+  <div style="font-size:21px; font-weight:bold; color:#24344B; line-height:1.5; margin-bottom:14px;">
+    {{title}}
+  </div>
+
+  <!-- プロフィール。概要なしなら外枠のmarginを除く。全項目なしなら外枠も省く。 -->
+  <div style="margin:0 0 14px;">
+    <!-- 画像未指定ならimgだけ省く。氏名や所属を横並びにしない。 -->
+    <img src="{{image_url}}" width="96" alt="{{image_alt}}"
+         style="height:auto; border:2px solid #D9DFE7; border-radius:5px; padding:3px;">
+    <!-- 氏名・SNSが未指定ならこのdivを省く。 -->
+    <div style="font-size:17px; font-weight:bold; color:#24344B; line-height:1.5; margin-top:8px;">
+      {{speaker_html}}
+    </div>
+    <!-- 所属未指定ならこのdivを省く。 -->
+    <div style="font-size:14px; color:#526176; line-height:1.6; margin-top:4px;">
+      {{affiliation}}
+    </div>
+  </div>
+
+  <!-- 概要未指定ならこのdivを省く。段落は最後以外margin:0 0 12px;、最後はmargin:0;。 -->
+  <div style="font-size:16px; line-height:1.7; color:#293444;">
+    {{description_html}}
+  </div>
+</div>

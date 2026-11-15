@@ -1,0 +1,59 @@
+<!--
+{{heading}}、{{section_symbol}}、{{session_symbol}}、{{title}}はエスケープしたテキスト。
+{{time_html}}は入力にある時刻を「開始 –<br>終了」に構造化したもの。片方だけなら区切りも省く。
+{{speaker_html}}は氏名・所属・SNSリンクを安全にHTML化したもの。未指定なら囲むdivごと省く。
+3種類の行から入力に応じたものだけを選び、元の順に必要件数繰り返す。
+最初の行の左tdへwidth="20%"とstyleのwidth:20%;、右tdへwidth="80%"とstyleのwidth:80%;を付ける。
+見出しが入力にない場合は見出し枠を省く。ページ先頭なら上marginを18pxにする。
+-->
+<div style="margin:32px 0 14px; padding:0 0 8px; border-bottom:2px solid #B8D6F0;">
+  <div style="font-size:22px; font-weight:bold; color:#28679B;">
+    <span style="color:#326CE5;">{{section_symbol}}</span> {{heading}}
+  </div>
+</div>
+<div style="width:100%;">
+  <table width="100%" cellpadding="0" cellspacing="0"
+         style="width:100%; max-width:none; table-layout:fixed; border-collapse:collapse; border:1px solid #D9DFE7; color:#293444;">
+    <tbody>
+      <!-- 通常セッション行 -->
+      <tr>
+        <td style="padding:8px 10px; border:1px solid #D9DFE7; vertical-align:top; font-size:14px; color:#24344B; font-weight:bold;">
+          {{time_html}}
+        </td>
+        <td style="padding:8px 12px; border:1px solid #D9DFE7; vertical-align:top;">
+          <div style="font-size:18px; font-weight:bold; line-height:1.4; color:#24344B;">
+            <span style="color:#326CE5;">{{session_symbol}}</span> {{title}}
+          </div>
+          <div style="font-size:13px; line-height:1.5; color:#526176; margin-top:3px; font-weight:normal;">
+            {{speaker_html}}
+          </div>
+        </td>
+      </tr>
+
+      <!-- オープニング・LT・エンディングなどの行 -->
+      <tr>
+        <td style="padding:8px 10px; border:1px solid #D9DFE7; vertical-align:top; font-size:14px; color:#526176;">
+          {{time_html}}
+        </td>
+        <td style="padding:8px 12px; border:1px solid #D9DFE7;">
+          <div style="font-size:17px; line-height:1.45; color:#24344B;">
+            {{title}}
+          </div>
+          <div style="font-size:13px; color:#526176; margin-top:3px;">
+            {{speaker_html}}
+          </div>
+        </td>
+      </tr>
+
+      <!-- 休憩行。登壇者など追記情報がある場合は13pxの登壇者型で保持する。 -->
+      <tr>
+        <td style="padding:7px 10px; border:1px solid #D9DFE7; vertical-align:top; font-size:14px; color:#526176;">
+          {{time_html}}
+        </td>
+        <td style="padding:7px 12px; border:1px solid #D9DFE7; font-size:15px; color:#526176;">
+          {{title}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
